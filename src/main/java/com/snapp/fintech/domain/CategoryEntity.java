@@ -1,12 +1,11 @@
 package com.snapp.fintech.domain;
 
+import com.snapp.fintech.domain.audit.Auditable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "CATEGORY")
@@ -14,7 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Setter
 @Getter
-public class CategoryEntity {
+public class CategoryEntity extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +22,6 @@ public class CategoryEntity {
     @Column(nullable = false)
     private String name;
 
-    private BigDecimal LastPrice;
+    private Boolean isDeleted = Boolean.FALSE;
 
 }
