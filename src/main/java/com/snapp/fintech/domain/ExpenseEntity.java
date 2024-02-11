@@ -1,5 +1,6 @@
 package com.snapp.fintech.domain;
 
+import com.snapp.fintech.config.constant.AppConstants;
 import com.snapp.fintech.domain.audit.Auditable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table(name = "EXPENSE")
+@Table(name = AppConstants.EXPENSE)
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -33,11 +34,11 @@ public class ExpenseEntity extends Auditable {
     private BigDecimal totalPrice;
 
     @ManyToOne
-    @JoinColumn(name = "user_id",nullable = false)
+    @JoinColumn(name = AppConstants.USER_ID, nullable = false)
     private UserEntity user;
 
     @ManyToOne
-    @JoinColumn(name = "category_id",nullable = false)
+    @JoinColumn(name = AppConstants.CATEGORY_ID, nullable = false)
     private CategoryEntity category;
 
     private Boolean isDeleted = Boolean.FALSE;
