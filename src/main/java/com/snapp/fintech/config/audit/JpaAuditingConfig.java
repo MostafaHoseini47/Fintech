@@ -13,6 +13,7 @@ import java.util.Optional;
 @EnableTransactionManagement
 @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
 public class JpaAuditingConfig {
+
     @Bean
     public AuditorAware<String> auditorProvider() {
         return () -> {
