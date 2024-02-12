@@ -18,9 +18,9 @@ purpose of application is calculation and getting report which related service t
 
 First,start [mvn clean package install] 
 
-Second, added DockerFile in the  [src\main\compose\docker\Dockerfile]  and you should open your terminal and afterThat write [ docker build -t fintech . ]  command 
+Second, added DockerFile in the  [src\main\compose\docker\Dockerfile]  and you should put jar file in this directory and open your terminal and afterThat write [ docker build -t fintech . ]  command 
 which cause creation application
 
-and also i have added docker compose file in the [src\main\compose\docker-compose.yml]  directory and you can use [ docker-compose up ] command for pick up some services such as fintech application and mysql and monitoring tools(prometheus , grafana) and logg management with ELK 
+and also i have added docker compose file in the [src\main\compose\docker-compose.yml]  directory and you can use [ docker-compose -f ..\docker-compose.yml up ] in the previous directory command for pick up some services such as fintech application and mysql and monitoring tools(prometheus , grafana) and logg management with ELK 
 
 you can see metrics in the [http://localhost:8080/fintech/actuator/prometheus] 

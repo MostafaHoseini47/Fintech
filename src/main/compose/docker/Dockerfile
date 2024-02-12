@@ -5,5 +5,5 @@ ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
     JAVA_OPTS="-Dspring.profiles.active=dev"
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x entrypoint.sh
-COPY ../../../../*.jar /app.jar
+COPY *.jar /app.jar
 CMD bash -c /entrypoint.sh
