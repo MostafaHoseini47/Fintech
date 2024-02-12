@@ -1,6 +1,8 @@
 package com.snapp.fintech.web.rest.exception;
 
 import com.snapp.fintech.exception.NotFoundException;
+import com.snapp.fintech.exception.UnauthorizedException;
+import com.snapp.fintech.exception.UserHaveNotException;
 import com.snapp.fintech.web.rest.exception.model.ErrorMessageModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,5 +17,17 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
     ResponseEntity<ErrorMessageModel> handleNotFoundException(NotFoundException ex) {
         ErrorMessageModel errorMessage = new ErrorMessageModel(HttpStatus.NOT_FOUND.value(), ex.getMessage());
         return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UserHaveNotException.class)
+    ResponseEntity<ErrorMessageModel> handleUserHaveNotStockException(UserHaveNotException ex) {
+        ErrorMessageModel errorMessage = new ErrorMessageModel(HttpStatus.NOT_ACCEPTABLE.value(), ex.getMessage());
+        return new ResponseEntity<>(errorMessage, HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    ResponseEntity<ErrorMessageModel> handleUserHaveNotStockException(UnauthorizedException ex) {
+        ErrorMessageModel errorMessage = new ErrorMessageModel(HttpStatus.UNAUTHORIZED.value(), ex.getMessage());
+        return new ResponseEntity<>(errorMessage, HttpStatus.UNAUTHORIZED);
     }
 }
