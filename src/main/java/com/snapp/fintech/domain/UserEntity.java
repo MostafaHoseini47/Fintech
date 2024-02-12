@@ -1,5 +1,6 @@
 package com.snapp.fintech.domain;
 
+import com.snapp.fintech.config.constant.AppConstants;
 import com.snapp.fintech.domain.audit.Auditable;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "USER")
+@Table(name = AppConstants.USER)
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -39,11 +40,9 @@ public class UserEntity extends Auditable implements UserDetails {
 
     private Boolean isActivate = Boolean.TRUE;
 
-    public static final String USER = "USER";
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(USER));
+        return List.of(new SimpleGrantedAuthority(AppConstants.USER));
     }
 
     @Override
