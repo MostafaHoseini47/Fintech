@@ -1,0 +1,8 @@
+package com.snapp.fintech.exception;
+
+public class UnauthorizedException extends RuntimeException {
+
+    public UnauthorizedException(String errorMessage) {
+        super(errorMessage);
+    }
+}
