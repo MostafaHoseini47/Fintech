@@ -8,6 +8,7 @@ import com.snapp.fintech.service.dto.CategoryDto;
 import com.snapp.fintech.service.mapper.CategoryMapper;
 import com.snapp.fintech.web.rest.model.ModelResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository repository;
@@ -25,6 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto createCategory(CategoryDto dto) {
+        log.info("category is creating successfully");
         return mapper.convertToDto(repository.save(mapper.convertToEntity(dto)));
     }
 
@@ -32,11 +35,13 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDto updateCategory(CategoryDto dto) {
         CategoryEntity category = findByIdAndIsDeletedFalse(dto.getId());
         BeanUtils.copyProperties(mapper.convertToEntity(dto), category);
+        log.info("category is updating and change primary information with name:" + category.getName()+"");
         return mapper.convertToDto(repository.save(category));
     }
 
     @Override
     public CategoryDto findCategoryById(Long id) {
+        log.info("Finding category by ID: {}", id);
         return mapper.convertToDto(findByIdAndIsDeletedFalse(id));
     }
 

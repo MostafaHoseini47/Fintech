@@ -12,6 +12,7 @@ import com.snapp.fintech.service.dto.ExpenseResponseDto;
 import com.snapp.fintech.service.mapper.ExpenseMapper;
 import com.snapp.fintech.web.rest.model.ModelResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import java.util.Objects;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class ExpenseServiceImpl implements ExpenseService {
 
     private final ExpenseRepository repository;
@@ -41,6 +43,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         UserEntity currentUser = userService.getCurrentUserAndCalculateStock(expense.getTotalPrice());
         expense.setUser(currentUser);
         expense.setCategory(categoryService.findByIdAndIsDeletedFalse(expenseDto.getCategory()));
+        log.info("expense is creating successfully");
         return mapper.convertToDto(repository.save(expense));
     }
 
@@ -59,11 +62,13 @@ public class ExpenseServiceImpl implements ExpenseService {
         if (!Objects.equals(expenseDto.getCategory(), expense.getCategory().getId())) {
             expense.setCategory(categoryService.findByIdAndIsDeletedFalse(expenseDto.getCategory()));
         }
+        log.info("expense is updating and change primary information with name:" + expense.getName()+"");
         return mapper.convertToDto(repository.save(expense));
     }
 
     @Override
     public ExpenseResponseDto findExpenseById(Long id) {
+        log.info("Finding expense by ID: {}", id);
         return mapper.convertToDto(findExpenseByIdAndIsDeletedFalse(id));
     }
 
