@@ -1,5 +1,6 @@
 package com.snapp.fintech.domain;
 
+import com.snapp.fintech.config.constant.AppConstants;
 import com.snapp.fintech.domain.audit.Auditable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "CATEGORY")
+@Table(name = AppConstants.CATEGORY)
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
